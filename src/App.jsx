@@ -1,12 +1,11 @@
-
 import "./App.css";
+import StartScreen from "./componenets/startScreen/StartScreen";
 
 function App() {
-
   return (
     <>
       <div className="App">
-        <h2>Caça palavras</h2>
+        <StartScreen />
       </div>
     </>
   );
