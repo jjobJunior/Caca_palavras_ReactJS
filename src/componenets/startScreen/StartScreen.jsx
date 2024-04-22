@@ -1,10 +1,10 @@
-import styles from "./StartScreen.module.css"
-const StartScreen = () => {
+import styles from "./StartScreen.module.css";
+const StartScreen = ({startGame}) => {
   return (
-    <div>
-      <h1 className={styles.starth1}>Caça Palavras</h1>
-      <p className={styles.startp}>Clique no botão abaixo para começar a jogar</p>
-      <button>Começar o jogo</button>
+    <div className={styles.start}>
+      <h1>Caça Palavras</h1>
+      <p>Clique no botão abaixo para começar a jogar</p>
+      <button onClick={startGame}>Começar o jogo</button>
     </div>
   );
 };
