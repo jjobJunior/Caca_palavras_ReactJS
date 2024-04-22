@@ -21,8 +21,39 @@ function App() {
   const [gameStage, setGameStage] = useState(stages[0].name);
   const [words] = useState(wordsList);
 
+  const [pickedword, setPickedword] = useState("");
+  const [pickedCategoriy, setpickedCategory] = useState("");
+  const [letters, setLetters] = useState([]);
+
+  const pickWordAndCategory = () => {
+    //pick a random category
+    const categories = Object.keys(words);
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
+
+    //pick a random word
+    const word =
+      words[category][Math.floor(Math.random() * words[category].length)];
+    return { word, category };
+  };
+
   //starts the caça palavras game
   const startGame = () => {
+    //pick word and pick category
+    const { word, category } = pickWordAndCategory();
+
+    //crate the array off letters
+    let wordLetters = word.split("");
+    wordLetters = wordLetters.map((letra) => letra.toLowerCase());
+
+    console.log(word, category);
+    console.log(wordLetters);
+
+    //fill states
+    setLetters(letters);
+    setPickedword(word);
+    setpickedCategory(category);
+
     setGameStage(stages[1].name);
   };
 
