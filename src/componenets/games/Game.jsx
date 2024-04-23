@@ -1,20 +1,34 @@
 import styles from "./Game.module.css";
 
-const Game = ({ verifyLetter }) => {
+const Game = ({
+  verifyLetter,
+  score,
+  letters,
+  guesses,
+  pickedword,
+  wrongLetters,
+  pickedCategory,
+  guessedLetters,
+}) => {
   return (
     <div className={styles.game}>
       <p className={styles.points}>
-        <span>Pontuação: 000</span>
+        <span>Pontuação: {score}</span>
       </p>
       <h1 className={styles.game}>Adivinhe a Palavra:</h1>
       <h3 className={styles.tip}>
         Dica sobre a palavra:
-        <span> Dica...</span>
+        <span> {pickedCategory}</span>
       </h3>
-      <p>Você ainda tem... tentativa(s).</p>
+      <p>Você ainda tem {guesses} tentativa(s).</p>
       <div className={styles.wordContainer}>
-        <span className={styles.letter}>A</span>
-        <span className={styles.blankSquare}></span>
+        {letters.map((letter, contador) =>
+          guessedLetters.includes(letter) ? (
+            <span className={styles.letter}> {letter}</span>
+          ) : (
+            <span key={contador} className={styles.blankSquare}></span>
+          )
+        )}
       </div>
       <div className={styles.letterContainer}>
         <p>Tente adivinhar uma letra da palavra</p>
@@ -25,7 +39,9 @@ const Game = ({ verifyLetter }) => {
       </div>
       <div className={styles.wrongLettersContainer}>
         <p>Letras já utilizadas:</p>
-        <span>a,</span>
+        {wrongLetters.map((letter, contador) => (
+          <span key={contador}>{letter}, </span>
+        ))}
         <span>b,</span>
       </div>
     </div>
