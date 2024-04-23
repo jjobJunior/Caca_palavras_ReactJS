@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import styles from "./Game.module.css";
 
 const Game = ({
@@ -10,6 +11,17 @@ const Game = ({
   pickedCategory,
   guessedLetters,
 }) => {
+  const [letter, setLetter] = useState("");
+  const letterInputRef = useRef(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    verifyLetter(letter);
+    setLetter("");
+    letterInputRef.current.focus();
+  };
+
   return (
     <div className={styles.game}>
       <p className={styles.points}>
@@ -32,8 +44,16 @@ const Game = ({
       </div>
       <div className={styles.letterContainer}>
         <p>Tente adivinhar uma letra da palavra</p>
-        <form>
-          <input type="text" name="letter" maxLength="1" required />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="letter"
+            maxLength="1"
+            required
+            onChange={(event) => setLetter(event.target.value)}
+            value={letter}
+            ref={letterInputRef}
+          />
           <button>Jogar!</button>
         </form>
       </div>
