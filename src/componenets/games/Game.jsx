@@ -25,7 +25,8 @@ const Game = ({
   return (
     <div className={styles.game}>
       <p className={styles.points}>
-        <span>Pontuação: {score}</span>
+        <span>Pontuação: </span>
+        {score}
       </p>
       <h1 className={styles.game}>Adivinhe a Palavra:</h1>
       <h3 className={styles.tip}>
@@ -36,7 +37,9 @@ const Game = ({
       <div className={styles.wordContainer}>
         {letters.map((letter, contador) =>
           guessedLetters.includes(letter) ? (
-            <span className={styles.letter}> {letter}</span>
+            <span className={styles.letter} key={contador}>
+              {letter}
+            </span>
           ) : (
             <span key={contador} className={styles.blankSquare}></span>
           )
@@ -49,8 +52,8 @@ const Game = ({
             type="text"
             name="letter"
             maxLength="1"
-            required
             onChange={(event) => setLetter(event.target.value)}
+            required
             value={letter}
             ref={letterInputRef}
           />
@@ -58,11 +61,10 @@ const Game = ({
         </form>
       </div>
       <div className={styles.wrongLettersContainer}>
-        <p>Letras já utilizadas:</p>
-        {wrongLetters.map((letter, contador) => (
-          <span key={contador}>{letter}, </span>
+        <p>Letras já utilizadas: </p>
+        {wrongLetters.map((letter, cont) => (
+          <span key={cont}>{letter}, </span>
         ))}
-        <span>b,</span>
       </div>
     </div>
   );
